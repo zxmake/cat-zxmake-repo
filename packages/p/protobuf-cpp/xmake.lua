@@ -18,7 +18,7 @@ package("protobuf-cpp", function()
         {
             version = function(version)
                 -- 最新版本的 protobuf url 比较奇怪, 这里手动剔除掉前两位
-                return version:sub(2)
+                return version:sub(3)
             end
         })
     add_versions("3.21.7", "87f3265aac463cbca6ca5c23a52a75aebbf645c986f521e68c13259d138b2874")
