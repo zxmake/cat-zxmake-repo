@@ -6,7 +6,16 @@ package("hesaisdk", function()
                  "21efef0902c024c33658d6b15a5e5972b1ccc59727622161162c9302223b2794")
     add_deps("boost 1.82.0")
 
+    on_load(function(package)
+        package:add("sysincludedirs", path.join(package:installdir(), "driver"))
+    end)
+
     on_install(function(package)
+        io.writefile("Version.h", [[
+            #define VERSION_MAJOR 2
+            #define VERSION_MINOR 0
+            #define VERSION_TINY  5
+        ]])
         io.writefile("xmake.lua", [[
             add_requires("boost 1.82.0")
 
@@ -18,7 +27,9 @@ package("hesaisdk", function()
                 add_files("libhesai/**.cc")
                 remove_files("libhesai/Container/src/*.cc", "libhesai/UdpParser/src/*.cc",
                              "libhesai/UdpParser/*.cc", "libhesai/Lidar/*.cc")
-                add_headerfiles("(**.h)", "(**.hpp)", "(**.cc)")
+                -- hesai 本身的头文件组织比较奇怪, 这里将其打平
+                -- 感觉也可以通过 package:add_includedirs() 添加本地头文件路径
+                add_headerfiles("**.h", "**.hpp", "**.cc")
                 add_includedirs("libhesai/PtcClient/include", "libhesai/PtcParser/include",
                                 "libhesai/UdpParser/include", "libhesai/include", "driver",
                                 "libhesai/Lidar", "libhesai/Source/include",
