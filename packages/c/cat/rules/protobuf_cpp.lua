@@ -218,7 +218,8 @@ rule("protobuf_cpp", function()
                                  sourcekind)
             -- get protoc
             function get_protoc(target)
-                return assert(target:data("protobuf.protoc"), "protoc not found!")
+                return assert(target:data("protobuf.protoc"),
+                              "protoc not found!")
             end
             local protoc = get_protoc(target, sourcekind)
 
@@ -407,7 +408,7 @@ rule("protobuf_cpp", function()
             nodes[nodename] = {
                 name = nodename,
                 job = batchjobs:addjob(nodename, function(index, total)
-                    local batchcmds_ = import("private.utils").batchcmds.new({
+                    local batchcmds_ = import("private.utils.batchcmds").new({
                         target = target
                     })
                     buildcmd_pfiles(target, batchcmds_, sourcefile_proto,

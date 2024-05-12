@@ -28,7 +28,6 @@ package("hesaisdk", function()
                                 "libhesai/UdpProtocol")
                 add_packages("boost")
             end)
-            
         ]])
         import("package.tools.xmake").install(package)
     end)
