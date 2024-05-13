@@ -11,17 +11,32 @@ package("hesaisdk", function()
     end)
 
     on_install(function(package)
+        -- 伪造 cmake 生成的 Version.h
         io.writefile("Version.h", [[
             #define VERSION_MAJOR 2
             #define VERSION_MINOR 0
             #define VERSION_TINY  5
         ]])
+        -- 避免 hesaisdk 全局命名空间 LOG_INFO 对项目的污染
+        io.replace("libhesai/Logger/include/logger.h", "enum LOGLEVEL",
+                   "namespace hesai{namespace lidar{\nenum LOGLEVEL",
+                   {plain = true})
+        io.replace("libhesai/Logger/include/logger.h", "#endif", "}}\n#endif",
+                   {plain = true})
+        io.replace("libhesai/Logger/src/logger.cc",
+                   "Logger& Logger::GetInstance()",
+                   "namespace hesai{namespace lidar{\nLogger& Logger::GetInstance()",
+                   {plain = true})
+        local logger_source_file = io.open("libhesai/Logger/src/logger.cc", "a")
+        logger_source_file:print("\n}}")
+        logger_source_file:close() -- 必须 close, 否则可能出现 bug
+
         io.writefile("xmake.lua", [[
             add_requires("boost 1.82.0")
 
             add_rules("mode.debug", "mode.release")
             set_languages("c++17")
-            add_cxxflags("-Wno-c++11-narrowing")
+            add_cxxflags("-Wno-c++11-narrowing", "-Wno-ignored-pragmas")
             target("hesaisdk", function()
                 set_kind("shared")
                 add_files("libhesai/**.cc")
