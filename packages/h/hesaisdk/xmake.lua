@@ -4,7 +4,23 @@ package("hesaisdk", function()
         "https://github.com/HesaiTechnology/HesaiLidar_SDK_2.0/archive/7d00ebe715d22eecbd08fc97016b4d7182d5a0e6.zip")
     add_versions("2.0.0",
                  "21efef0902c024c33658d6b15a5e5972b1ccc59727622161162c9302223b2794")
-    add_deps("boost 1.82.0")
+    -- add_deps("boost 1.82.0", {
+    --     configs = {
+    --         filesystem = true,
+    --         system = true,
+    --         thread = true,
+    --         chrono = true,
+    --         date_time = true,
+    --         atomic = true,
+    --         iostreams = true,
+    --         regex = true
+    --     }
+    -- })
+    add_syslinks("ssl", "crypto")
+    add_links("hesaisdk")
+    add_syslinks("boost_system", "boost_filesystem", "boost_thread",
+                 "boost_chrono", "boost_date_time", "boost_atomic", "ssl",
+                 "crypto", "boost_iostreams", "boost_regex", "pthread")
 
     on_load(function(package)
         package:add("sysincludedirs", path.join(package:installdir(), "driver"))
