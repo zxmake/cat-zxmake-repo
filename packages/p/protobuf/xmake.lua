@@ -5,9 +5,15 @@ package("protobuf", function()
     -- https://github.com/protocolbuffers/protobuf/releases/download/v21.7/protobuf-cpp-3.21.7.zip
     add_urls(
         "https://github.com/protocolbuffers/protobuf/releases/download/v$(version)/protobuf-cpp-3.$(version).zip")
+    -- 下载 tag
+    -- add_urls(
+    --     "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.$(version).zip")
 
     add_versions("21.7",
                  "87f3265aac463cbca6ca5c23a52a75aebbf645c986f521e68c13259d138b2874")
+    -- 和 ubuntu 20.04 自带的 protobuf 版本对齐
+    add_versions("6.1",
+                 "ced3d566b14ccee1e6e96a2cc8dc7c4a3e92bf2d637c3ccf794d018d860647f4")
 
     add_configs("zlib",
                 {description = "Enable zlib", default = true, type = "boolean"})
