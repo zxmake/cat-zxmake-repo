@@ -48,7 +48,7 @@ package("hesaisdk", function()
         logger_source_file:close() -- 必须 close, 否则可能出现 bug
 
         io.writefile("xmake.lua", [[
-            add_requires("boost 1.82.0")
+            -- add_requires("boost 1.82.0")
 
             add_rules("mode.debug", "mode.release")
             set_languages("c++17")
@@ -68,7 +68,10 @@ package("hesaisdk", function()
                                 "libhesai/Container/src", "libhesai", "libhesai/PtcParser",
                                 "libhesai/UdpParser", "libhesai/UdpParser/src",
                                 "libhesai/UdpProtocol")
-                add_packages("boost")
+                -- add_packages("boost")
+                add_syslinks("boost_system", "boost_filesystem", "boost_thread",
+                            "boost_chrono", "boost_date_time", "boost_atomic", "ssl",
+                            "crypto", "boost_iostreams", "boost_regex", "pthread")
             end)
         ]])
         import("package.tools.xmake").install(package)
