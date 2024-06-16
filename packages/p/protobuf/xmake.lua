@@ -12,7 +12,7 @@ package("protobuf", function()
     add_versions("21.7",
                  "87f3265aac463cbca6ca5c23a52a75aebbf645c986f521e68c13259d138b2874")
     -- 和 ubuntu 20.04 自带的 protobuf 版本对齐
-    add_versions("6.1",
+    add_versions("3.6.1",
                  "ced3d566b14ccee1e6e96a2cc8dc7c4a3e92bf2d637c3ccf794d018d860647f4")
 
     add_configs("zlib",
@@ -25,6 +25,11 @@ package("protobuf", function()
     on_load(function(package)
         package:addenv("PATH", "bin")
         if package:config("zlib") then package:add("deps", "zlib") end
+
+        if package:version() == "3.6.1" then
+            package:set("urls",
+                        "https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-cpp-3.6.1.zip")
+        end
     end)
 
     on_install(function(package)
