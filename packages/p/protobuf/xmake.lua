@@ -3,13 +3,26 @@ package("protobuf", function()
     set_description("Google's data interchange format for cpp")
 
     -- https://github.com/protocolbuffers/protobuf/releases/download/v21.7/protobuf-cpp-3.21.7.zip
-    add_urls(
-        "https://github.com/protocolbuffers/protobuf/releases/download/v$(version)/protobuf-cpp-3.$(version).zip")
+    -- add_urls(
+    --     "https://github.com/protocolbuffers/protobuf/releases/download/v$(version)/protobuf-cpp-3.$(version).zip")
     -- 下载 tag
     -- add_urls(
     --     "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.$(version).zip")
 
-    add_versions("21.7",
+    add_urls(
+        "https://github.com/protocolbuffers/protobuf/releases/download/v$(version)",
+        {
+            version = function(version)
+                local ver = tostring(version)
+                if ver == "3.21.7" then
+                    return "21.7/protobuf-cpp-" .. version .. ".zip"
+                else
+                    return version .. "/protobuf-cpp-" .. version .. ".zip"
+                end
+            end
+        })
+
+    add_versions("3.21.7",
                  "87f3265aac463cbca6ca5c23a52a75aebbf645c986f521e68c13259d138b2874")
     -- 和 ubuntu 20.04 自带的 protobuf 版本对齐
     add_versions("3.6.1",
@@ -25,11 +38,6 @@ package("protobuf", function()
     on_load(function(package)
         package:addenv("PATH", "bin")
         if package:config("zlib") then package:add("deps", "zlib") end
-
-        if package:version() == "3.6.1" then
-            package:set("urls",
-                        "https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-cpp-3.6.1.zip")
-        end
     end)
 
     on_install(function(package)
