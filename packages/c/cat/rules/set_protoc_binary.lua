@@ -17,6 +17,8 @@ rule("set_protoc_binary", function()
             end
             local protoc_version = string.trim(
                                        os.iorunv(protoc.program, {"--version"}))
+
+            import("core.base.option")
             if option.get("verbose") then
                 cprint(
                     "${bright blue}[rule@zelos/protobuf_cpp][info]${clear} find protoc [" ..

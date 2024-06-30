@@ -2,6 +2,8 @@ package("cat", function()
     -- xmake f -c
     on_load(function(package)
         package:lock()
+        import("core.base.option")
+
         os.tryrm(package:installdir("rules"))
         os.cp(path.join(os.scriptdir(), "rules"), package:installdir())
         if option.get("verbose") then
