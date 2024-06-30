@@ -17,9 +17,11 @@ rule("set_protoc_binary", function()
             end
             local protoc_version = string.trim(
                                        os.iorunv(protoc.program, {"--version"}))
-            cprint(
-                "${bright blue}[rule@zelos/protobuf_cpp][info]${clear} find protoc [" ..
-                    protoc_version .. "] binary in path " .. protoc.program)
+            if option.get("verbose") then
+                cprint(
+                    "${bright blue}[rule@zelos/protobuf_cpp][info]${clear} find protoc [" ..
+                        protoc_version .. "] binary in path " .. protoc.program)
+            end
             target:data_set("protobuf.protoc", protoc.program)
         end
 
