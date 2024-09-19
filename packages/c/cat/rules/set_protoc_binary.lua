@@ -21,7 +21,7 @@ rule("set_protoc_binary", function()
             import("core.base.option")
             if option.get("verbose") then
                 cprint(
-                    "${bright blue}[rule@zelos/protobuf_cpp][info]${clear} find protoc [" ..
+                    "${bright blue}[rule@cat/protobuf_cpp][info]${clear} find protoc [" ..
                         protoc_version .. "] binary in path " .. protoc.program)
             end
             target:data_set("protobuf.protoc", protoc.program)
