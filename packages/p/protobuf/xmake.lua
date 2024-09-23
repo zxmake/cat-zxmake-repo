@@ -2,6 +2,13 @@ package("protobuf", function()
     set_homepage("https://developers.google.com/protocol-buffers/")
     set_description("Google's data interchange format for cpp")
 
+    -- https://github.com/protocolbuffers/protobuf/issues/4958
+    -- 这个版本的 protobuf 必须带上 -lpthread, 否则会报错:
+    -- terminate called after throwing an instance of 'std::system_error'
+    --   what():  Unknown error -1
+    -- Aborted (core dumped)
+    add_syslinks("pthread")
+
     -- https://github.com/protocolbuffers/protobuf/releases/download/v21.7/protobuf-cpp-3.21.7.zip
     -- add_urls(
     --     "https://github.com/protocolbuffers/protobuf/releases/download/v$(version)/protobuf-cpp-3.$(version).zip")
@@ -33,7 +40,7 @@ package("protobuf", function()
 
     add_deps("cmake")
 
-    add_links("protobuf", "pthread")
+    add_links("protobuf")
 
     on_load(function(package)
         package:addenv("PATH", "bin")
