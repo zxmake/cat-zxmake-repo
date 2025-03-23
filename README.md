@@ -11,3 +11,9 @@ xmake lua hash.sha256 ${file_name}
 ```bash
 xmake plugin --install https://github.com/SirLynix/xmake-plugins
 ```
+
+## 用法
+
+```lua
+add_repositories("my-repo https://github.com/zxmake/cat-zxmake-repo.git")
+```

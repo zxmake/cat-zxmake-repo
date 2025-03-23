@@ -5,5 +5,8 @@
     ],
     "cSpell.enabledFileTypes": {
         "lua": false
-    }
+    },
+    "cSpell.words": [
+        "xmake"
+    ]
 }
