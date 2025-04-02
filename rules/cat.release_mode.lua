@@ -1,4 +1,4 @@
-rule("release_mode", function()
+rule("cat.release_mode", function()
     on_config(function(target)
         if is_mode("release") then
             -- cuda
