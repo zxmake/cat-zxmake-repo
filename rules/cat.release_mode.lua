@@ -13,8 +13,6 @@ rule("cat.release_mode", function()
                 target:add("cxflags", "-DNDEBUG")
             end
 
-            target:add("ldflags", "-Wl,--export-dynamic", "-Wl,--build-id",
-                       "-flto=thin")
             target:add("ldflags", "-fuse-ld=lld")
             -- target:add("shflags", "-fuse-ld=lld")
 
