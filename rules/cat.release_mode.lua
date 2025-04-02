@@ -13,7 +13,7 @@ rule("cat.release_mode", function()
                 target:add("cxflags", "-DNDEBUG")
             end
 
-            target:add("ldflags", "-fuse-ld=lld")
+            -- target:add("ldflags", "-fuse-ld=lld")
             -- target:add("shflags", "-fuse-ld=lld")
 
             if not target:get("optimize") then
