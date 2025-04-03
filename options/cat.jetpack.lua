@@ -29,7 +29,7 @@ option("cat.jetpack", function()
         elseif uname == "aarch64" then
             jetpack = "6"
         end
-        cprint("${bright green}[configure] jetpack:${clear} [" .. zelos_jetpack .. "]")
+        cprint("${bright green}[configure] jetpack:${clear} [" .. jetpack .. "]")
         option:set_value(jetpack)
     end)
 end)

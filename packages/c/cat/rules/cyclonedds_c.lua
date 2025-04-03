@@ -3,7 +3,7 @@ rule("cyclonedds_c", function()
     set_extensions(".idl")
 
     on_config(function(target)
-        local sourcebatch = target:sourcebatches()["@zelos/cyclonedds_c"]
+        local sourcebatch = target:sourcebatches()["@cat/cyclonedds_c"]
         for _, sourcefile_idl in ipairs(sourcebatch and sourcebatch.sourcefiles) do
             local rootdir = autogendir and autogendir or
                                 path.join(target:autogendir(), "rules",
