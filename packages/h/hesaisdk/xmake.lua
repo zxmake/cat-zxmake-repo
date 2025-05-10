@@ -22,10 +22,6 @@ package("hesaisdk", function()
                  "boost_chrono", "boost_date_time", "boost_atomic", "ssl",
                  "crypto", "boost_iostreams", "boost_regex", "pthread")
 
-    on_load(function(package)
-        package:add("sysincludedirs", path.join(package:installdir(), "driver"))
-    end)
-
     on_install(function(package)
         -- 伪造 cmake 生成的 Version.h
         io.writefile("Version.h", [[

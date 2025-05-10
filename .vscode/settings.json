@@ -3,10 +3,18 @@
         "undefined-field",
         "undefined-global"
     ],
+<<<<<<< Updated upstream
     "cSpell.enabledFileTypes": {
         "lua": false
     },
     "cSpell.words": [
+=======
+    "cSpell.words": [
+        "hesaisdk",
+        "iostreams",
+        "libhesai",
+        "syslinks",
+>>>>>>> Stashed changes
         "xmake"
     ]
 }
