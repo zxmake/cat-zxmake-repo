@@ -1,26 +1,27 @@
 package("ziplib", function()
     set_homepage("https://github.com/hsmith/ziplib.git")
     -- set_urls("https://github.com/hsmith/ziplib.git")
-    set_urls(
-        "https://github.com/hsmith/ziplib/archive/6a7ada3cf1b438c4e56326f8faeb04b2cad765f2.zip")
+    set_urls("https://github.com/hsmith/ziplib/archive/6a7ada3cf1b438c4e56326f8faeb04b2cad765f2.zip")
 
-    add_versions("1.0.0",
-                 "c31ceb7038466570af74b49a3e5e6798f757334962ba0f6130bf3248e5fd7722")
+    add_versions("1.0.0", "c31ceb7038466570af74b49a3e5e6798f757334962ba0f6130bf3248e5fd7722")
 
     on_install(function(package)
         io.writefile("xmake.lua", [[
             add_rules("plugin.compile_commands.autoupdate", {outputdir = "."})
 
-            set_config("cxx", "clang++")
-            set_config("cc", "clang")
-            set_config("ld", "clang++")
+            -- set_config("cxx", "clang++")
+            -- set_config("cc", "clang")
+            -- set_config("ld", "clang++")
+
+            -- 使用 gcc 编译
+            set_toolchains("gcc")
             
             set_languages("c++11", "c11")
             add_includedirs(os.projectdir())
             add_sysincludedirs("/usr/include/opencv4")
             add_sysincludedirs("/usr/include/pcl-1.10")
-            add_cxxflags("-Wall", "-Wextra", "-Werror", "-Wno-unused-function",
-                         "-Wno-unused-parameter")
+            -- add_cxxflags("-Wall", "-Wextra", "-Werror", "-Wno-unused-function",
+            --              "-Wno-unused-parameter")
             set_optimize("fastest")
             add_cxflags("-g", "-fPIC")
             add_ldflags("-Wl,--export-dynamic", "-Wl,--build-id")
